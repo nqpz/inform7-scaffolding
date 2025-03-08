@@ -111,24 +111,26 @@ exec ${pkgs.rlwrap}/bin/rlwrap ${pkgs.inform7}/libexec/dumb-glulxe "$@"
     makefileInclude = pkgs.writeTextFile {
       name = "include.mk";
       text = ''
-test.ulx: scaffolding story.ni
-	inform7-compile test.ulx -c
+bin/test.ulx: scaffolding bin story.ni
+	inform7-compile bin/test.ulx -c
 
-release.ulx: scaffolding story.ni
-	inform7-compile release.ulx -r
+bin/release.ulx: scaffolding bin story.ni
+	inform7-compile bin/release.ulx -r
 
 .PHONY: test
-test: test.ulx
-	inform7-run test.ulx
+test: bin/test.ulx
+	inform7-run bin/test.ulx
 
 scaffolding:
 	inform7-create-scaffolding
 
+bin:
+	mkdir -p bin
+
 .PHONY: clean
 clean:
 	rm -rf scaffolding
-	rm -f test.ulx
-	rm -f release.ulx
+	rm -rf bin
 '';
     };
   };
