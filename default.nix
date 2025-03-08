@@ -107,6 +107,32 @@ exec ${pkgs.rlwrap}/bin/rlwrap ${pkgs.inform7}/libexec/dumb-glulxe "$@"
 '';
   };
 
+  files = {
+    makefileInclude = pkgs.writeTextFile {
+      name = "include.mk";
+      text = ''
+test.ulx: scaffolding story.ni
+	inform7-compile test.ulx -c
+
+release.ulx: scaffolding story.ni
+	inform7-compile release.ulx -r
+
+.PHONY: test
+test: test.ulx
+	inform7-run test.ulx
+
+scaffolding:
+	inform7-create-scaffolding
+
+.PHONY: clean
+clean:
+	rm -rf scaffolding
+	rm -f test.ulx
+	rm -f release.ulx
+'';
+    };
+  };
+
   shellBuildInputs = [
     scripts.inform7-init
     scripts.inform7-create-scaffolding
@@ -117,6 +143,7 @@ exec ${pkgs.rlwrap}/bin/rlwrap ${pkgs.inform7}/libexec/dumb-glulxe "$@"
 
   mkShell = pkgs.mkShell {
     buildInputs = shellBuildInputs;
+    shellHook = ''export INFORM7_SCAFFOLDING_INCLUDE_MK="${files.makefileInclude}"'';
   };
 
   buildInputs = with scripts; [
@@ -145,6 +172,7 @@ exec ${pkgs.rlwrap}/bin/rlwrap ${pkgs.inform7}/libexec/dumb-glulxe "$@"
 in
 {
   scripts = scripts;
+  files = files;
   shellBuildInputs = shellBuildInputs;
   mkShell = mkShell;
   buildInputs = buildInputs;
