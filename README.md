@@ -16,7 +16,18 @@ having to consider all the other files, which the scripts instead put
 into a subdirectory named `scaffolding`.
 
 Run `inform7-init` with no arguments to create a new project.  This will
-create two files: An empty `story.ni` and a `uuid.txt` containing an
-UUID.
+create these files:
+
+  - `story.ni`: An empty file.
+  - `uuid.txt`: A single-line file containing an UUID.
+  - `Makefile`: A Makefile that you can use for development and release.
+
+You can put this in your `.gitignore`:
+
+```
+scaffolding
+*.ulx
+result
+```
 
 **Example use:** https://github.com/nqpz/kantinen2012

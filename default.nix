@@ -1,7 +1,7 @@
 pkgs:
 let
   scripts = {
-    inform7-init = pkgs.writeScriptBin "inform7-init" ''
+    inform7-init = pkgs.writeScriptBin "inform7-init" (''
 #!/bin/sh
 #
 # Create core files.
@@ -9,7 +9,7 @@ let
 # Exit on first error.
 set -e
 
-if [[ -f uuid.txt || -f story.ni ]]; then
+if [[ -f uuid.txt || -f story.ni || -f Makefile ]]; then
     echo It looks like you have already run inform7-init. >/dev/stderr
     exit 1
 fi
@@ -20,14 +20,9 @@ ${pkgs.util-linux}/bin/uuidgen > uuid.txt
 # Every Inform 7 game has at least one .ni file.
 touch story.ni
 
-# Initialize the .gitignore.
-{
-    echo /scaffolding
-    echo /test.ulx
-    echo /release.ulx
-    echo /result
-} >> .gitignore
-'';
+# Create a Makefile
+echo 'include $'' + ''{INFORM7_SCAFFOLDING_INCLUDE_MK}' > Makefile
+'');
 
     inform7-create-scaffolding = pkgs.writeScriptBin "inform7-create-scaffolding" ''
 #!/bin/sh
