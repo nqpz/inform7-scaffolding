@@ -163,6 +163,7 @@ clean:
     buildInputs = buildInputs;
 
     buildPhase = ''
+    export INFORM7_SCAFFOLDING_INCLUDE_MK="${files.makefileInclude}"
     make clean release.ulx
   '';
 
