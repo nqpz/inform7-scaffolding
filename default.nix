@@ -1,7 +1,7 @@
 pkgs:
-
-{
-  inform7-init = pkgs.writeScriptBin "inform7-init" ''
+let
+  scripts = {
+    inform7-init = pkgs.writeScriptBin "inform7-init" ''
 #!/bin/sh
 #
 # Create core files.
@@ -29,7 +29,7 @@ touch story.ni
 } >> .gitignore
 '';
 
-  inform7-create-scaffolding = pkgs.writeScriptBin "inform7-create-scaffolding" ''
+    inform7-create-scaffolding = pkgs.writeScriptBin "inform7-create-scaffolding" ''
 #!/bin/sh
 #
 # Create scaffolding required by Inform tools.  Inform is not lightweight when
@@ -70,7 +70,7 @@ rm story.ni
 ln -s ../../../story.ni .
 '';
 
-  inform7-compile = pkgs.writeScriptBin "inform7-compile" ''
+    inform7-compile = pkgs.writeScriptBin "inform7-compile" ''
 #!/bin/sh
 #
 # Compile a story contained within a scaffolding into an .ulx file.
@@ -98,11 +98,36 @@ ${pkgs.inform7}/bin/i7 "$@" scaffolding/game.inform
 cp scaffolding/game.inform/Build/output.ulx "$output"
 '';
 
-  inform7-run = pkgs.writeScriptBin "inform7-run" ''
+    inform7-run = pkgs.writeScriptBin "inform7-run" ''
 #!/bin/sh
 #
 # Run an .ulx file.
 
 exec ${pkgs.rlwrap}/bin/rlwrap ${pkgs.inform7}/libexec/dumb-glulxe "$@"
 '';
+  };
+
+  shellBuildInputs = [
+    scripts.inform7-init
+    scripts.inform7-create-scaffolding
+    scripts.inform7-compile
+    scripts.inform7-run
+    pkgs.util-linux
+  ];
+
+  mkShell = pkgs.mkShell {
+    buildInputs = shellBuildInputs;
+  };
+
+  buildInputs = with scripts; [
+    scripts.inform7-create-scaffolding
+    scripts.inform7-compile
+    pkgs.util-linux
+  ];
+in
+{
+  scripts = scripts;
+  shellBuildInputs = shellBuildInputs;
+  mkShell = mkShell;
+  buildInputs = buildInputs;
 }
