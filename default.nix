@@ -124,10 +124,29 @@ exec ${pkgs.rlwrap}/bin/rlwrap ${pkgs.inform7}/libexec/dumb-glulxe "$@"
     scripts.inform7-compile
     pkgs.util-linux
   ];
+
+  mkDerivation = src: pname: version: pkgs.stdenv.mkDerivation {
+    pname = pname;
+    version = version;
+
+    src = src;
+
+    buildInputs = buildInputs;
+
+    buildPhase = ''
+    make clean release.ulx
+  '';
+
+    installPhase = ''
+    mkdir $out
+    cp release.ulx $out/${pname}.ulx
+  '';
+  };
 in
 {
   scripts = scripts;
   shellBuildInputs = shellBuildInputs;
   mkShell = mkShell;
   buildInputs = buildInputs;
+  mkDerivation = mkDerivation;
 }
