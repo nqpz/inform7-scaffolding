@@ -15,7 +15,10 @@ These scripts ensure that you can focus on your `.ni` story file without
 having to consider all the other files, which the scripts instead put
 into a subdirectory named `scaffolding`.
 
-**Example use:** https://github.com/nqpz/kantinen2012
+You can use this project with [niv](https://github.com/nmattia/niv) by
+running `niv init` and then `niv add nqpz/inform7-scaffolding`.
+**Example use:** <https://github.com/nqpz/kantinen2012>.  This project
+is currently not available as a Nix flake, but probably should be.
 
 
 ## Creating a new project
