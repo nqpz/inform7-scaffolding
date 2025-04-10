@@ -159,12 +159,12 @@ clean:
 
     buildPhase = ''
     export INFORM7_SCAFFOLDING_INCLUDE_MK="${files.makefileInclude}"
-    make clean release.ulx
+    make clean bin/release.ulx
   '';
 
     installPhase = ''
     mkdir $out
-    cp release.ulx $out/${pname}.ulx
+    cp bin/release.ulx $out/${pname}.ulx
   '';
   };
 in
