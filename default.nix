@@ -93,13 +93,59 @@ ${pkgs.inform7}/bin/i7 "$@" scaffolding/game.inform
 cp scaffolding/game.inform/Build/output.ulx "$output"
 '';
 
-    inform7-run = pkgs.writeScriptBin "inform7-run" ''
+    inform7-run-basic = pkgs.writeScriptBin "inform7-run-basic" ''
 #!/bin/sh
 #
 # Run an .ulx file.
 
 exec ${pkgs.rlwrap}/bin/rlwrap ${pkgs.inform7}/libexec/dumb-glulxe "$@"
 '';
+  };
+
+  programs = {
+    glulxe = let
+      buildInputs = [ pkgs.ncurses.dev ];
+
+      glktermw-dev = pkgs.stdenv.mkDerivation {
+        pname = "glktermw";
+        version = "1.0.4";
+
+        src = pkgs.fetchurl {
+          url = "https://eblong.com/zarf/glk/glktermw-104.tar.gz";
+          sha256 = "5968630b45e2fd53de48424559e3579db0537c460f4dc2631f258e1c116eb4ea";
+        };
+
+        inherit buildInputs;
+
+        installPhase = ''
+        mkdir $out
+        cp -r . $out
+        '';
+      };
+    in
+      pkgs.stdenv.mkDerivation {
+        pname = "glulxe";
+        version = "0.6.1";
+
+        src = pkgs.fetchurl {
+          url = "https://www.eblong.com/zarf/glulx/glulxe-061.tar.gz";
+          sha256 = "f81dc474d60d7d914fcde45844a4e1acafee50e13aebfcb563249cc56740769f";
+        };
+
+        inherit buildInputs;
+
+        buildPhase = ''
+echo ${glktermw-dev}
+        sed -i "s|../cheapglk|${glktermw-dev}|" Makefile
+        sed -i "s|Make.cheapglk|Make.glktermw|" Makefile
+        make glulxe
+        '';
+
+        installPhase = ''
+        mkdir -p $out/bin
+        cp glulxe $out/bin
+        '';
+      };
   };
 
   files = {
@@ -114,7 +160,7 @@ bin/release.ulx: scaffolding bin story.ni
 
 .PHONY: test
 test: bin/test.ulx
-	inform7-run bin/test.ulx
+	glulxe bin/test.ulx
 
 scaffolding:
 	inform7-create-scaffolding
@@ -134,8 +180,9 @@ clean:
     scripts.inform7-init
     scripts.inform7-create-scaffolding
     scripts.inform7-compile
-    scripts.inform7-run
+    scripts.inform7-run-basic
     pkgs.util-linux
+    programs.glulxe
   ];
 
   mkShell = pkgs.mkShell {
