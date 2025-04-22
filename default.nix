@@ -135,8 +135,9 @@ exec ${pkgs.rlwrap}/bin/rlwrap ${pkgs.inform7}/libexec/dumb-glulxe "$@"
         inherit buildInputs;
 
         configurePhase = ''
-        sed -i "s|../cheapglk|${glktermw-dev}|" Makefile
-        sed -i "s|Make.cheapglk|Make.glktermw|" Makefile
+        substituteInPlace Makefile \
+          --replace ../cheapglk ${glktermw-dev} \
+          --replace Make.cheapglk Make.glktermw
         '';
 
         buildPhase = ''
