@@ -134,10 +134,12 @@ exec ${pkgs.rlwrap}/bin/rlwrap ${pkgs.inform7}/libexec/dumb-glulxe "$@"
 
         inherit buildInputs;
 
-        buildPhase = ''
-echo ${glktermw-dev}
+        configurePhase = ''
         sed -i "s|../cheapglk|${glktermw-dev}|" Makefile
         sed -i "s|Make.cheapglk|Make.glktermw|" Makefile
+        '';
+
+        buildPhase = ''
         make glulxe
         '';
 
