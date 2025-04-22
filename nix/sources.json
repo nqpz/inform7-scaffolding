@@ -1,0 +1,38 @@
+{
+    "inform": {
+        "branch": "master",
+        "description": "The core software distribution for the Inform 7 programming language.",
+        "homepage": "",
+        "owner": "ganelson",
+        "repo": "inform",
+        "rev": "1cbb1a835cf24c658a41de3a2d27d2576b99f9ad",
+        "sha256": "0id55h44rw338f1fvqla79d5w3hm8b3b196w1svrrmfgcmqfhn9y",
+        "type": "tarball",
+        "url": "https://github.com/ganelson/inform/archive/1cbb1a835cf24c658a41de3a2d27d2576b99f9ad.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
+    "intest": {
+        "branch": "master",
+        "description": "A text-based command-line tool for testing other command-line tools.",
+        "homepage": null,
+        "owner": "ganelson",
+        "repo": "intest",
+        "rev": "73a297f43715ee0c41873a394fb7b97bcbaf92d3",
+        "sha256": "041gw8n7k7lacar6jc1mwsa43kbnwrqp994sxd8y7s011vh85hdb",
+        "type": "tarball",
+        "url": "https://github.com/ganelson/intest/archive/73a297f43715ee0c41873a394fb7b97bcbaf92d3.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
+    "inweb": {
+        "branch": "master",
+        "description": "A modern system for literate programming.",
+        "homepage": null,
+        "owner": "ganelson",
+        "repo": "inweb",
+        "rev": "5ed062f75afaa638db04986cfb757c1c570fa5f9",
+        "sha256": "1qmng26s9vx6mc39qq82if5cpx2g5hv04ngh5ki6lhya1qjmrccd",
+        "type": "tarball",
+        "url": "https://github.com/ganelson/inweb/archive/5ed062f75afaa638db04986cfb757c1c570fa5f9.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    }
+}
