@@ -63,6 +63,11 @@ You can also:
     `release.ulx` and make it available in `result/`.  This is useful if
     you only need to build the game, and not actively develop it.
 
+  - Run `make map` to open Inform's generated world HTML page, showing,
+    among other things, a map of your created world.  (All this target
+    does is call `xdg-open` to open `scaffolding/Index/World.html`.)
+    You must have first built either a test build or a release build.
+
 (Alternatively, if you can't install Nix, you can follow the [Inform 7
 manual on how to use its
 GUIs](https://ganelson.github.io/inform-website/book/WI_1_3.html) and

@@ -23,6 +23,10 @@ scaffolding:
 bin:
 	mkdir -p bin
 
+.PHONY: map
+map:
+	xdg-open scaffolding/Index/World.html
+
 .PHONY: clean
 clean:
 	rm -rf scaffolding
