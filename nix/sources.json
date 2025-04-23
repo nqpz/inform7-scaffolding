@@ -1,4 +1,16 @@
 {
+    "extensions": {
+        "branch": "10.1",
+        "description": "Inform 7 extensions -- some may be ready for public use, others may be barely working experiments. Enjoy!",
+        "homepage": "https://intfiction.org/t/friends-of-i7-github/4103",
+        "owner": "i7",
+        "repo": "extensions",
+        "rev": "9c52d89674b8de35bddf19dd58a65c3fc960b01f",
+        "sha256": "0alprvm9imjw9cmp3ikxc8q3h9fdf8dnx131k8c4bc29w042hyfh",
+        "type": "tarball",
+        "url": "https://github.com/i7/extensions/archive/9c52d89674b8de35bddf19dd58a65c3fc960b01f.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
     "inform": {
         "branch": "master",
         "description": "The core software distribution for the Inform 7 programming language.",

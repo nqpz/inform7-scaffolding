@@ -1,4 +1,4 @@
-pkgs: sources:
+pkgs: sources: files:
 {
   inform7 = let
     buildInputs = [ pkgs.clang ];
@@ -114,7 +114,7 @@ pkgs: sources:
       test -f /tmp/inform7/gameinfo.dbg || touch /tmp/inform7/gameinfo.dbg
       cd $out
       EOF
-      echo 'exec ./inbuild/Tangled/inbuild "$@"' >> $out/bin/inbuild
+      echo 'exec ./inbuild/Tangled/inbuild -external ${files.externalNest} "$@"' >> $out/bin/inbuild
 
       chmod +x $out/bin/inbuild
     '';

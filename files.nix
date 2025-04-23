@@ -1,4 +1,4 @@
-pkgs:
+pkgs: sources:
 {
   makefileInclude = pkgs.writeTextFile {
     name = "include.mk";
@@ -24,5 +24,21 @@ clean:
 	rm -rf scaffolding
 	rm -rf bin
 '';
+  };
+
+  externalNest = pkgs.stdenv.mkDerivation {
+    pname = "inform7-extensions";
+    version = "git";
+
+    unpackPhase = "true";
+
+    buildInputs = [];
+
+    buildPhase = "true";
+
+    installPhase = ''
+      mkdir $out
+      cp -r ${sources.extensions} $out/Extensions
+    '';
   };
 }

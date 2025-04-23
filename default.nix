@@ -1,9 +1,9 @@
 pkgs:
 let
   sources = import ./nix/sources.nix;
-  programs = import ./programs.nix pkgs sources;
+  files = import ./files.nix pkgs sources;
+  programs = import ./programs.nix pkgs sources files;
   scripts = import ./scripts.nix pkgs programs;
-  files = import ./files.nix pkgs;
 in
 {
   mkShell = pkgs.mkShell {
