@@ -9,6 +9,7 @@ all:
 	@echo "  test: Build a test build and run it."
 	@echo "  bin/test.ulx: Build a test build."
 	@echo "  bin/release.ulx: Build a release build."
+	@echo "  map: Open a map of the world."
 	@echo "  init: Create a new project consisting of story.ni and uuid.txt."
 
 .PHONY: init
