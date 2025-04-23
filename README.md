@@ -35,7 +35,7 @@ You can put this in your `.gitignore`:
 
 ```
 scaffolding
-*.ulx
+bin
 result
 ```
 
