@@ -3,6 +3,7 @@ pkgs: sources:
   inform7 = let
     buildInputs = [ pkgs.clang ];
 
+    # Inweb offers a modern approach to literate programming.
     inweb-dev = pkgs.stdenv.mkDerivation {
       pname = "inweb";
       version = "7.2.1-beta+1B67";
@@ -26,6 +27,8 @@ pkgs: sources:
       '';
     };
 
+    # Intest is a flexible command-line tool for running batches of tests on
+    # other command-line tools. It requires Inweb.
     inweb-and-intest-dev = pkgs.stdenv.mkDerivation {
       pname = "intest";
       version = "2.2.0-beta+1A60";
@@ -50,6 +53,8 @@ pkgs: sources:
       '';
     };
 
+    # Build Inform 7 and install the entire directory tree. This is useful as an
+    # intermediate step before the next wrapper derivation.
     inform7-dev = pkgs.stdenv.mkDerivation {
       pname = "inform7-dev";
       version = "10.2.0-beta+6X83";
@@ -85,6 +90,14 @@ pkgs: sources:
 
     buildPhase = "true";
 
+    # This currently installs only the inbuild command line utility. See
+    # https://ganelson.github.io/inform/inbuild/index.html for the
+    # manual. Inform 7 also comes with other command line utilities that we
+    # don't need direct access to.
+    #
+    # inbuild expects that the relative inform7/Internal directory and the
+    # relative gameinfo.dbg file are writable, so we let them live in
+    # /tmp/inform7 and recreate them as needed.
     installPhase = ''
       cp -r ${inform7-dev} $out
       chmod u+w $out
@@ -93,6 +106,7 @@ pkgs: sources:
       ln -s /tmp/inform7/Internal $out/inform7/Internal
       ln -s /tmp/inform7/gameinfo.dbg $out/gameinfo.dbg
       mkdir $out/bin
+
       cat > $out/bin/inbuild <<EOF
       #!/bin/sh
       set -e
@@ -101,6 +115,7 @@ pkgs: sources:
       cd $out
       EOF
       echo 'exec ./inbuild/Tangled/inbuild "$@"' >> $out/bin/inbuild
+
       chmod +x $out/bin/inbuild
     '';
   };
@@ -108,6 +123,7 @@ pkgs: sources:
   glulxe = let
     buildInputs = [ pkgs.ncurses.dev ];
 
+    # glktermw supports wide term characters.
     glktermw-dev = pkgs.stdenv.mkDerivation {
       pname = "glktermw";
       version = "1.0.4";
@@ -125,6 +141,7 @@ pkgs: sources:
       '';
     };
   in
+    # Glulxe is an interpreter for the Glulx virtual machine.
     pkgs.stdenv.mkDerivation {
       pname = "glulxe";
       version = "0.6.1";
