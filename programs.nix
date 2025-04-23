@@ -12,17 +12,17 @@ pkgs: sources:
       inherit buildInputs;
 
       configurePhase = ''
-      cp -r ${sources.inweb} inweb
-      chmod u+w -R inweb
+        cp -r ${sources.inweb} inweb
+        chmod u+w -R inweb
       '';
 
       buildPhase = ''
-      bash inweb/scripts/first.sh linux
+        bash inweb/scripts/first.sh linux
       '';
 
       installPhase = ''
-      mkdir $out
-      cp -r inweb $out
+        mkdir $out
+        cp -r inweb $out
       '';
     };
 
@@ -35,18 +35,18 @@ pkgs: sources:
       inherit buildInputs;
 
       configurePhase = ''
-       cp -r ${inweb-dev}/* .
-      cp -r ${sources.intest} intest
-      chmod u+w -R intest
+        cp -r ${inweb-dev}/* .
+        cp -r ${sources.intest} intest
+        chmod u+w -R intest
       '';
 
       buildPhase = ''
-      bash intest/scripts/first.sh
+        bash intest/scripts/first.sh
       '';
 
       installPhase = ''
-      mkdir $out
-      cp -r inweb intest $out
+        mkdir $out
+        cp -r inweb intest $out
       '';
     };
 
@@ -59,18 +59,18 @@ pkgs: sources:
       inherit buildInputs;
 
       configurePhase = ''
-      cp -r ${inweb-and-intest-dev}/* .
-      cp -r ${sources.inform} inform
-      chmod u+w -R inform
+        cp -r ${inweb-and-intest-dev}/* .
+        cp -r ${sources.inform} inform
+        chmod u+w -R inform
       '';
 
       buildPhase = ''
-      cd inform
-      bash scripts/first.sh
+        cd inform
+        bash scripts/first.sh
       '';
 
       installPhase = ''
-      cp -r . $out
+        cp -r . $out
       '';
     };
   in pkgs.stdenv.mkDerivation {
@@ -86,22 +86,22 @@ pkgs: sources:
     buildPhase = "true";
 
     installPhase = ''
-    cp -r ${inform7-dev} $out
-    chmod u+w $out
-    chmod u+w -R $out/inform7
-    rm -r $out/inform7/Internal
-    ln -s /tmp/inform7/Internal $out/inform7/Internal
-    ln -s /tmp/inform7/gameinfo.dbg $out/gameinfo.dbg
-    mkdir $out/bin
-    cat > $out/bin/inbuild <<EOF
-    #!/bin/sh
-    set -e
-    test -d /tmp/inform7/Internal || (mkdir -p /tmp/inform7 && cp -r ${inform7-dev}/inform7/Internal /tmp/inform7/ && chmod u+w /tmp/inform7)
-    test -f /tmp/inform7/gameinfo.dbg || touch /tmp/inform7/gameinfo.dbg
-    cd $out
-    EOF
-    echo 'exec ./inbuild/Tangled/inbuild "$@"' >> $out/bin/inbuild
-    chmod +x $out/bin/inbuild
+      cp -r ${inform7-dev} $out
+      chmod u+w $out
+      chmod u+w -R $out/inform7
+      rm -r $out/inform7/Internal
+      ln -s /tmp/inform7/Internal $out/inform7/Internal
+      ln -s /tmp/inform7/gameinfo.dbg $out/gameinfo.dbg
+      mkdir $out/bin
+      cat > $out/bin/inbuild <<EOF
+      #!/bin/sh
+      set -e
+      test -d /tmp/inform7/Internal || (mkdir -p /tmp/inform7 && cp -r ${inform7-dev}/inform7/Internal /tmp/inform7/ && chmod u+w /tmp/inform7)
+      test -f /tmp/inform7/gameinfo.dbg || touch /tmp/inform7/gameinfo.dbg
+      cd $out
+      EOF
+      echo 'exec ./inbuild/Tangled/inbuild "$@"' >> $out/bin/inbuild
+      chmod +x $out/bin/inbuild
     '';
   };
 
@@ -120,8 +120,8 @@ pkgs: sources:
       inherit buildInputs;
 
       installPhase = ''
-      mkdir $out
-      cp -r . $out
+        mkdir $out
+        cp -r . $out
       '';
     };
   in
@@ -137,18 +137,18 @@ pkgs: sources:
       inherit buildInputs;
 
       configurePhase = ''
-      substituteInPlace Makefile \
-        --replace ../cheapglk ${glktermw-dev} \
-        --replace Make.cheapglk Make.glktermw
+        substituteInPlace Makefile \
+          --replace ../cheapglk ${glktermw-dev} \
+          --replace Make.cheapglk Make.glktermw
       '';
 
       buildPhase = ''
-      make glulxe
+        make glulxe
       '';
 
       installPhase = ''
-      mkdir -p $out/bin
-      cp glulxe $out/bin
+        mkdir -p $out/bin
+        cp glulxe $out/bin
       '';
     };
 }

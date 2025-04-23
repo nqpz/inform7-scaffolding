@@ -16,7 +16,7 @@ in
       programs.glulxe
     ];
     shellHook = ''
-    export INFORM7_SCAFFOLDING_INCLUDE_MK="${files.makefileInclude}"
+      export INFORM7_SCAFFOLDING_INCLUDE_MK="${files.makefileInclude}"
     '';
   };
 
@@ -32,13 +32,13 @@ in
     ];
 
     buildPhase = ''
-    export INFORM7_SCAFFOLDING_INCLUDE_MK="${files.makefileInclude}"
-    make clean bin/release.ulx
+      export INFORM7_SCAFFOLDING_INCLUDE_MK="${files.makefileInclude}"
+      make clean bin/release.ulx
     '';
 
     installPhase = ''
-    mkdir $out
-    cp bin/release.ulx $out/${pname}.ulx
+      mkdir $out
+      cp bin/release.ulx $out/${pname}.ulx
     '';
   };
 }
