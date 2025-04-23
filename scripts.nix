@@ -74,5 +74,6 @@ shift
 
 ${programs.inform7}/bin/inbuild -project $(readlink -f scaffolding) -build "$@"
 cp scaffolding/Build/output.ulx "$output"
+find scaffolding/Index -type f -exec sed -i 's|src=inform:/|src=${programs.inform7}/resources/Imagery/|g' {} \;
 '';
 }
