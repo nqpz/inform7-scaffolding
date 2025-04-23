@@ -3,6 +3,10 @@ pkgs: sources:
   makefileInclude = pkgs.writeTextFile {
     name = "include.mk";
     text = ''
+.PHONY: init
+init:
+	inform7-init
+
 bin/test.ulx: scaffolding bin story.ni
 	inform7-compile bin/test.ulx -debug
 

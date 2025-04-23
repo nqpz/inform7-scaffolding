@@ -9,7 +9,7 @@ pkgs: programs:
 set -e
 
 if [[ -f uuid.txt || -f story.ni || -f Makefile ]]; then
-    echo It looks like you have already run inform7-init. >/dev/stderr
+    echo It looks like you have already run init. >/dev/stderr
     exit 1
 fi
 

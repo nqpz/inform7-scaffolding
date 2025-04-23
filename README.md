@@ -24,7 +24,7 @@ be.)  **Example use:** <https://github.com/nqpz/kantinen2012>.
 
 First install [Nix](https://nixos.org/).
 
-Run `inform7-init` with no arguments to create a new project.  This will
+Run `make init` with no arguments to create a new project.  This will
 create these files:
 
   - `story.ni`: An empty file.
