@@ -29,9 +29,7 @@ echo 'include $'' + ''{INFORM7_SCAFFOLDING_INCLUDE_MK}' > Makefile
     inform7-create-scaffolding = pkgs.writeScriptBin "inform7-create-scaffolding" ''
 #!/bin/sh
 #
-# Create scaffolding required by Inform tools.  Inform is not lightweight when
-# it comes to the amount of files it wants to keep around but that I don't care
-# about.
+# Create scaffolding required by Inform tools.
 
 # Exit on first error.
 set -e
@@ -49,22 +47,11 @@ fi
 # Keep all the scaffolding in a separate directory.
 mkdir scaffolding
 cd scaffolding
-
-# Avoid placing a glaring "Inform" directory in $HOME.
-mkdir game.state
-export HOME="$(readlink -f game.state)"
-
-# Create a project and call it "game".
-yes Q | ${pkgs.inform7}/bin/i7
-(echo S; echo game.inform; echo Q) | ${pkgs.inform7}/bin/i7
-cd game.inform
-
 # Use the existing uuid.txt and story.ni
-rm uuid.txt
-ln -s ../../uuid.txt .
+ln -s ../uuid.txt .
+mkdir Source
 cd Source
-rm story.ni
-ln -s ../../../story.ni .
+ln -s ../../story.ni .
 '';
 
     inform7-compile = pkgs.writeScriptBin "inform7-compile" ''
@@ -88,11 +75,8 @@ if ! [[ "$output" ]]; then
 fi
 shift
 
-# Avoid placing a glaring "Inform" directory in $HOME.
-export HOME="$(readlink -f scaffolding/game.state)"
-
-${pkgs.inform7}/bin/i7 "$@" scaffolding/game.inform
-cp scaffolding/game.inform/Build/output.ulx "$output"
+${programs.inform7}/bin/inbuild -project $(readlink -f scaffolding) -build "$@"
+cp scaffolding/Build/output.ulx "$output"
 '';
 
     inform7-run-basic = pkgs.writeScriptBin "inform7-run-basic" ''
@@ -263,10 +247,10 @@ exec ${pkgs.rlwrap}/bin/rlwrap ${pkgs.inform7}/libexec/dumb-glulxe "$@"
       name = "include.mk";
       text = ''
 bin/test.ulx: scaffolding bin story.ni
-	inform7-compile bin/test.ulx -c
+	inform7-compile bin/test.ulx -debug
 
 bin/release.ulx: scaffolding bin story.ni
-	inform7-compile bin/release.ulx -r
+	inform7-compile bin/release.ulx -release
 
 .PHONY: test
 test: bin/test.ulx
