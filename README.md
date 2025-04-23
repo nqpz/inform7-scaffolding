@@ -1,24 +1,23 @@
 # Inform 7 scaffolding
 
-This repository provides wrapper scripts around the [Inform 7 package in
-nixpkgs](https://github.com/NixOS/nixpkgs/blob/nixos-unstable/pkgs/by-name/in/inform7/package.nix).
+This repository provides wrapper scripts and a wrapper Makefile around
+the [Inform 7](https://github.com/ganelson/inform) system and the
+[Glulxe](https://github.com/erkyrath/glulxe) interpreter.
 
-By default Inform 7 insists on creating lots of not-strictly-needed
-files, also in $HOME, which I dislike.
+You only truly need two files to create an Inform 7 project: A `.ni`
+file which contains the story, and a text file containing an UUID
+(presumably as a way for each Inform 7 game in existence to have a
+unique ID - this gets embedded into the final binary).
 
-It turns out that you only truly need two files: A `.ni` file which
-contains the story, and a text file containing an UUID (presumably as a
-way for each Inform 7 game in existence to have a unique ID - this gets
-embedded into the final binary).
-
-These scripts ensure that you can focus on your `.ni` story file without
-having to consider all the other files, which the scripts instead put
-into a subdirectory named `scaffolding`.
+The wrapping in this repository ensure that you can focus on your `.ni`
+story file without having to consider all the other files that the
+Inform 7 machinery likes to create, which the scripts instead put into a
+subdirectory named `scaffolding`.
 
 You can use this project with [niv](https://github.com/nmattia/niv) by
-running `niv init` and then `niv add nqpz/inform7-scaffolding`.
-**Example use:** <https://github.com/nqpz/kantinen2012>.  This project
-is currently not available as a Nix flake, but probably should be.
+running `niv init` and then `niv add nqpz/inform7-scaffolding`.  (This
+project is currently not available as a Nix flake, but probably should
+be.)  **Example use:** <https://github.com/nqpz/kantinen2012>.
 
 
 ## Creating a new project
@@ -58,7 +57,7 @@ You can also:
 
   - Run `make bin/release.ulx` to build a release build.
 
-  - Run `inform7-run release.ulx` to run the release build.
+  - Run `glulxe bin/release.ulx` to run the release build.
 
   - Run `nix-build` to build a release build.  This will build
     `release.ulx` and make it available in `result/`.  This is useful if
@@ -74,6 +73,11 @@ from there.)
 ## External resources
 
   - [Emacs package on MELPA](https://melpa.org/#/inform7)
+
+Note: There is also an [Inform 7 package in
+nixpkgs](https://github.com/NixOS/nixpkgs/blob/nixos-unstable/pkgs/by-name/in/inform7/package.nix),
+but this is outdated and uses a 2015 version of Inform 7 along with a
+wrapper script.
 
 
 ## License
