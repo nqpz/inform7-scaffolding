@@ -3,6 +3,14 @@ pkgs: sources:
   makefileInclude = pkgs.writeTextFile {
     name = "include.mk";
     text = ''
+.PHONY: all
+all:
+	@echo "Available targets:"
+	@echo "  test: Build a test build and run it."
+	@echo "  bin/test.ulx: Build a test build."
+	@echo "  bin/release.ulx: Build a release build."
+	@echo "  init: Create a new project consisting of story.ni and uuid.txt."
+
 .PHONY: init
 init:
 	inform7-init
