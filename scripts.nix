@@ -75,12 +75,4 @@ shift
 ${programs.inform7}/bin/inbuild -project $(readlink -f scaffolding) -build "$@"
 cp scaffolding/Build/output.ulx "$output"
 '';
-
-  inform7-run-basic = pkgs.writeScriptBin "inform7-run-basic" ''
-#!/bin/sh
-#
-# Run an .ulx file.
-
-exec ${pkgs.rlwrap}/bin/rlwrap ${pkgs.inform7}/libexec/dumb-glulxe "$@"
-'';
 }

@@ -11,7 +11,6 @@ in
       scripts.inform7-init
       scripts.inform7-create-scaffolding
       scripts.inform7-compile
-      scripts.inform7-run-basic
       pkgs.util-linux
       programs.inform7
       programs.glulxe
