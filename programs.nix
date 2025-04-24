@@ -95,23 +95,20 @@ pkgs: sources:
     # manual. Inform 7 also comes with other command line utilities that we
     # don't need direct access to.
     #
-    # inform7 expects that the relative inform7/Internal directory and the
-    # relative gameinfo.dbg file are writable, so we let them live in
-    # /tmp/inform7 and recreate them as needed.
+    # inform7 expects that the relative inform7/Internal directory is writable,
+    # so we let it live in /tmp/inform7 and recreate it as needed.
     installPhase = ''
       cp -r ${inform7-dev} $out
       chmod u+w $out
       chmod u+w -R $out/inform7
       rm -r $out/inform7/Internal
       ln -s /tmp/inform7/Internal $out/inform7/Internal
-      ln -s /tmp/inform7/gameinfo.dbg $out/gameinfo.dbg
       mkdir $out/bin
 
       cat > $out/inform7-ensure-tmp <<EOF
       #!/bin/sh
       set -e
       test -d /tmp/inform7/Internal || (mkdir -p /tmp/inform7 && cp -r ${inform7-dev}/inform7/Internal /tmp/inform7/ && chmod u+w -R /tmp/inform7)
-      test -f /tmp/inform7/gameinfo.dbg || touch /tmp/inform7/gameinfo.dbg
       EOF
       chmod +x $out/inform7-ensure-tmp
     '';
