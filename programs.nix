@@ -90,11 +90,6 @@ pkgs: sources:
 
     buildPhase = "true";
 
-    # This currently installs only the inform7 command line utility. See
-    # https://ganelson.github.io/inform/inform7/index.html for the
-    # manual. Inform 7 also comes with other command line utilities that we
-    # don't need direct access to.
-    #
     # inform7 expects that the relative inform7/Internal directory is writable,
     # so we let it live in /tmp/inform7 and recreate it as needed.
     installPhase = ''
