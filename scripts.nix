@@ -51,6 +51,8 @@ cd Source
 ln -s ../../story.ni .
 '';
 
+  # List of inform6 command line flags:
+  # https://inform-fiction.org/manual/html/tables.html#tbl3
   inform7-compile = pkgs.writeScriptBin "inform7-compile" ''
 #!/bin/sh
 #
