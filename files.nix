@@ -16,17 +16,17 @@ all:
 init:
 	inform7-init
 
-bin/test.ulx: bin story.ni
+bin/test.ulx: scaffolding/uuid.txt bin story.ni
 	inform7-compile bin/test.ulx -debug
 
-bin/release.ulx: bin story.ni
+bin/release.ulx: scaffolding/uuid.txt bin story.ni
 	inform7-compile bin/release.ulx -release
 
 .PHONY: test
 test: bin/test.ulx
 	glulxe bin/test.ulx
 
-scaffolding:
+scaffolding/uuid.txt:
 	inform7-create-scaffolding
 
 bin:
