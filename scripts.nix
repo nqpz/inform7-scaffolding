@@ -76,6 +76,8 @@ abs_path="$(readlink -f scaffolding)"
 ${programs.inform7}/inform7-ensure-tmp
 ${programs.inform7}/inform7/Tangled/inform7 -external ${files.externalNest} -format=Inform6/32/v3.1.2 -project "$abs_path" "$@"
 ${programs.inform7}/inform6/Tangled/inform6 -kE2SwG "$abs_path/Build/auto.inf" "$output"
+test -d scaffolding/Release && rmdir scaffolding/Release
+test -d scaffolding/Extensions && rm -r scaffolding/Extensions
 find scaffolding/Index -type f -exec sed -i 's|src=inform:/|src=${programs.inform7}/resources/Imagery/|g' {} \;
 '';
 }
