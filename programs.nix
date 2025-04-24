@@ -1,4 +1,4 @@
-pkgs: sources: files:
+pkgs: sources:
 {
   inform7 = let
     buildInputs = [ pkgs.clang ];
@@ -107,15 +107,13 @@ pkgs: sources: files:
       ln -s /tmp/inform7/gameinfo.dbg $out/gameinfo.dbg
       mkdir $out/bin
 
-      cat > $out/bin/inform7 <<EOF
+      cat > $out/inform7-ensure-tmp <<EOF
       #!/bin/sh
       set -e
       test -d /tmp/inform7/Internal || (mkdir -p /tmp/inform7 && cp -r ${inform7-dev}/inform7/Internal /tmp/inform7/ && chmod u+w -R /tmp/inform7)
       test -f /tmp/inform7/gameinfo.dbg || touch /tmp/inform7/gameinfo.dbg
       EOF
-      echo 'exec '$out'/inform7/Tangled/inform7 -external ${files.externalNest} "$@"' >> $out/bin/inform7
-
-      chmod +x $out/bin/inform7
+      chmod +x $out/inform7-ensure-tmp
     '';
   };
 
