@@ -16,17 +16,17 @@ all:
 init:
 	inform7-init
 
-bin/test.ulx: scaffolding/uuid.txt bin story.ni
+bin/test.ulx: scaffolding bin story.ni
 	inform7-compile bin/test.ulx -debug
 
-bin/release.ulx: scaffolding/uuid.txt bin story.ni
+bin/release.ulx: scaffolding bin story.ni
 	inform7-compile bin/release.ulx -release
 
 .PHONY: test
 test: bin/test.ulx
 	glulxe bin/test.ulx
 
-scaffolding/uuid.txt:
+scaffolding:
 	inform7-create-scaffolding
 
 bin:
@@ -34,7 +34,7 @@ bin:
 
 .PHONY: map
 map:
-	xdg-open scaffolding/Index/World.html
+	xdg-open scaffolding/game.inform/Index/World.html
 
 .PHONY: clean
 clean:

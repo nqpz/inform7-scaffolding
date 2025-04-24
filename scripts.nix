@@ -36,19 +36,19 @@ if ! [[ -f uuid.txt && -f story.ni ]]; then
     echo Please run inform7-init first. >/dev/stderr
     exit 1
 fi
-if [[ -d scaffolding ]]; then
+if [[ -d scaffolding/game.inform ]]; then
     echo Scaffolding already exists. >/dev/stderr
     exit 1
 fi
 
 # Keep all the scaffolding in a separate directory.
-mkdir scaffolding
-cd scaffolding
+mkdir -p scaffolding/game.inform
+cd scaffolding/game.inform
 # Use the existing uuid.txt and story.ni
-ln -s ../uuid.txt .
+ln -s ../../uuid.txt .
 mkdir Source
 cd Source
-ln -s ../../story.ni .
+ln -s ../../../story.ni .
 '';
 
   # List of inform6 command line flags:
@@ -62,7 +62,7 @@ ln -s ../../story.ni .
 set -e
 
 # Check that we are ready.
-if ! [[ -d scaffolding ]]; then
+if ! [[ -d scaffolding/game.inform ]]; then
     echo Please run inform7-create-scaffolding first. >/dev/stderr
     exit 1
 fi
@@ -74,12 +74,10 @@ if ! [[ "$output" ]]; then
 fi
 shift
 
-abs_path="$(readlink -f scaffolding)"
+abs_path="$(readlink -f scaffolding/game.inform)"
 ${programs.inform7}/inform7-ensure-tmp
 ${programs.inform7}/inform7/Tangled/inform7 -silence -external ${files.externalNest} -format=Inform6/32/v3.1.2 -project "$abs_path" "$@"
 ${programs.inform7}/inform6/Tangled/inform6 -E2SwG "$abs_path/Build/auto.inf" "$output" >/dev/null
-test -d scaffolding/Release && rmdir scaffolding/Release
-test -d scaffolding/Extensions && rm -r scaffolding/Extensions
-find scaffolding/Index -type f -exec sed -i 's|src=inform:/|src=${programs.inform7}/resources/Imagery/|g' {} \;
+find scaffolding/game.inform/Index -type f -exec sed -i 's|src=inform:/|src=${programs.inform7}/resources/Imagery/|g' {} \;
 '';
 }
