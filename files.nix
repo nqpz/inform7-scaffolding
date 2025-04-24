@@ -16,10 +16,10 @@ all:
 init:
 	inform7-init
 
-bin/test.ulx: scaffolding bin story.ni
+bin/test.ulx: bin story.ni
 	inform7-compile bin/test.ulx -debug
 
-bin/release.ulx: scaffolding bin story.ni
+bin/release.ulx: bin story.ni
 	inform7-compile bin/release.ulx -release
 
 .PHONY: test
