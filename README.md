@@ -36,7 +36,7 @@ consisting of `.i7x` Inform 7 extension files. These can be imported
 like so:
 
 ```
-Include <name> by Project.
+Include <name> by project.
 ```
 
 You can put this in your `.gitignore`:

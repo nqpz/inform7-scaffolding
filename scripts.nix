@@ -45,7 +45,7 @@ fi
 mkdir -p scaffolding/game.inform
 mkdir -p scaffolding/game.materials/Extensions
 cd scaffolding/game.materials/Extensions
-ln -s ../../../includes Project
+ln -s ../../../includes project
 cd ../../game.inform
 # Use the existing uuid.txt and story.ni
 ln -s ../../uuid.txt .
