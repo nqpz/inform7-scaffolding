@@ -44,7 +44,9 @@ fi
 # Keep all the scaffolding in a separate directory.
 mkdir -p scaffolding/game.inform
 mkdir -p scaffolding/game.materials/Extensions
-cd scaffolding/game.inform
+cd scaffolding/game.materials/Extensions
+ln -s ../../../includes Project
+cd ../../game.inform
 # Use the existing uuid.txt and story.ni
 ln -s ../../uuid.txt .
 mkdir Source

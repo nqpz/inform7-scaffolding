@@ -31,6 +31,14 @@ create these files:
   - `uuid.txt`: A single-line file containing an UUID.
   - `Makefile`: A Makefile that you can use for development and release.
 
+In addition, you can choose to create a root directory named `includes`
+consisting of `.i7x` Inform 7 extension files. These can be imported
+like so:
+
+```
+Include <name> by Project.
+```
+
 You can put this in your `.gitignore`:
 
 ```
