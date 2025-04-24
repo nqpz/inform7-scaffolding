@@ -72,8 +72,9 @@ if ! [[ "$output" ]]; then
 fi
 shift
 
-${programs.inform7}/bin/inbuild -project $(readlink -f scaffolding) -build "$@"
-cp scaffolding/Build/output.ulx "$output"
+abs_path="$(readlink -f scaffolding)"
+${programs.inform7}/bin/inform7 -format=Inform6/32/v3.1.2 -project "$abs_path" "$@"
+${programs.inform7}/inform6/Tangled/inform6 -kE2SwG "$abs_path/Build/auto.inf" "$output"
 find scaffolding/Index -type f -exec sed -i 's|src=inform:/|src=${programs.inform7}/resources/Imagery/|g' {} \;
 '';
 }

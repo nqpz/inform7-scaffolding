@@ -90,12 +90,12 @@ pkgs: sources: files:
 
     buildPhase = "true";
 
-    # This currently installs only the inbuild command line utility. See
-    # https://ganelson.github.io/inform/inbuild/index.html for the
+    # This currently installs only the inform7 command line utility. See
+    # https://ganelson.github.io/inform/inform7/index.html for the
     # manual. Inform 7 also comes with other command line utilities that we
     # don't need direct access to.
     #
-    # inbuild expects that the relative inform7/Internal directory and the
+    # inform7 expects that the relative inform7/Internal directory and the
     # relative gameinfo.dbg file are writable, so we let them live in
     # /tmp/inform7 and recreate them as needed.
     installPhase = ''
@@ -107,16 +107,16 @@ pkgs: sources: files:
       ln -s /tmp/inform7/gameinfo.dbg $out/gameinfo.dbg
       mkdir $out/bin
 
-      cat > $out/bin/inbuild <<EOF
+      cat > $out/bin/inform7 <<EOF
       #!/bin/sh
       set -e
       test -d /tmp/inform7/Internal || (mkdir -p /tmp/inform7 && cp -r ${inform7-dev}/inform7/Internal /tmp/inform7/ && chmod u+w -R /tmp/inform7)
       test -f /tmp/inform7/gameinfo.dbg || touch /tmp/inform7/gameinfo.dbg
       cd $out
       EOF
-      echo 'exec ./inbuild/Tangled/inbuild -external ${files.externalNest} "$@"' >> $out/bin/inbuild
+      echo 'exec ./inform7/Tangled/inform7 -external ${files.externalNest} "$@"' >> $out/bin/inform7
 
-      chmod +x $out/bin/inbuild
+      chmod +x $out/bin/inform7
     '';
   };
 
