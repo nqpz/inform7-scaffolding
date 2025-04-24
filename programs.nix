@@ -112,9 +112,8 @@ pkgs: sources: files:
       set -e
       test -d /tmp/inform7/Internal || (mkdir -p /tmp/inform7 && cp -r ${inform7-dev}/inform7/Internal /tmp/inform7/ && chmod u+w -R /tmp/inform7)
       test -f /tmp/inform7/gameinfo.dbg || touch /tmp/inform7/gameinfo.dbg
-      cd $out
       EOF
-      echo 'exec ./inform7/Tangled/inform7 -external ${files.externalNest} "$@"' >> $out/bin/inform7
+      echo 'exec '$out'/inform7/Tangled/inform7 -external ${files.externalNest} "$@"' >> $out/bin/inform7
 
       chmod +x $out/bin/inform7
     '';
