@@ -100,7 +100,6 @@ pkgs: sources:
       ln -s /tmp/inform7/Internal $out/inform7/Internal
       empty_doc_dir="$out/inform7/Internal/Extensions/Graham Nelson/Basic Inform.i7xd/Documentation"
       test -d "$empty_doc_dir" && rmdir "$empty_doc_dir"
-      mkdir $out/bin
 
       cat > $out/inform7-ensure-tmp <<EOF
       #!/bin/sh
