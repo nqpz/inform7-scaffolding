@@ -16,10 +16,12 @@ all:
 init:
 	inform7-init
 
-bin/test.ulx: scaffolding bin story.ni $(shell find includes 2>/dev/null || true)
+ULX_DEPS=scaffolding bin story.ni $(shell find includes 2>/dev/null || true)
+
+bin/test.ulx: $(ULX_DEPS)
 	inform7-compile bin/test.ulx -debug
 
-bin/release.ulx: scaffolding bin story.ni $(shell find includes 2>/dev/null || true)
+bin/release.ulx: $(ULX_DEPS)
 	inform7-compile bin/release.ulx -release
 
 .PHONY: test
