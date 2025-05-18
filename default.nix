@@ -6,8 +6,8 @@ let
   scripts = import ./scripts.nix pkgs files programs;
 in
 {
-  mkShell = pkgs.mkShell {
-    buildInputs = [
+  mkShell = extraPkgs: pkgs.mkShell {
+    buildInputs = extraPkgs ++ [
       scripts.inform7-init
       scripts.inform7-create-scaffolding
       scripts.inform7-compile
@@ -20,12 +20,12 @@ in
     '';
   };
 
-  mkDerivation = src: pname: version: pkgs.stdenv.mkDerivation {
+  mkDerivation = extraPkgs: src: pname: version: pkgs.stdenv.mkDerivation {
     inherit src;
     inherit pname;
     inherit version;
 
-    buildInputs = with scripts; [
+    buildInputs = extraPkgs ++ [
       scripts.inform7-create-scaffolding
       scripts.inform7-compile
       pkgs.util-linux
