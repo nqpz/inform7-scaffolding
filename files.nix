@@ -39,8 +39,8 @@ bin:
 map:
 	xdg-open scaffolding/game.inform/Index/World.html
 
-.PHONY: clean
-clean:
+.PHONY: clean_internal
+clean_internal:
 	rm -rf scaffolding
 	rm -rf bin
 '';

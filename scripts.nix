@@ -21,6 +21,8 @@ touch story.ni
 
 # Create a Makefile
 echo 'include $'' + ''{INFORM7_SCAFFOLDING_INCLUDE_MK}' > Makefile
+echo '.PHONY: clean' >> Makefile
+echo 'clean: clean_internal' >> Makefile
 '');
 
   inform7-create-scaffolding = pkgs.writeScriptBin "inform7-create-scaffolding" ''
