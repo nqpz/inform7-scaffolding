@@ -41,4 +41,7 @@ in
       cp bin/release.ulx $out/${pname}.ulx
     '';
   };
+
+  # Expose the interpreter for the case where you only want to run a game.
+  glulxe = programs.glulxe;
 }
