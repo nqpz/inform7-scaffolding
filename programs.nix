@@ -104,7 +104,7 @@ pkgs: sources:
       cat > $out/inform7-ensure-tmp <<EOF
       #!/bin/sh
       set -e
-      test -d /tmp/inform7/Internal || (mkdir -p /tmp/inform7 && cp -r ${inform7-dev}/inform7/Internal /tmp/inform7/ && chmod u+w -R /tmp/inform7)
+      test -d /tmp/inform7/Internal || (mkdir -p /tmp/inform7 && cp -r ${inform7-dev}/inform7/Internal /tmp/inform7/ && chmod u+w -R /tmp/inform7 && cp -r "${inform7-dev}/inform7/Tests/Extensions/Emily Short" /tmp/inform7/Internal/Extensions/)
       EOF
       chmod +x $out/inform7-ensure-tmp
     '';
