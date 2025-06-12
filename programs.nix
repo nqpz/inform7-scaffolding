@@ -125,6 +125,11 @@ pkgs: sources:
 
       inherit buildInputs;
 
+      configurePhase = ''
+        substituteInPlace Makefile \
+          --replace 'OPTIONS =' 'OPTIONS = -O3'
+      '';
+
       installPhase = ''
         mkdir $out
         cp -r . $out
@@ -146,7 +151,8 @@ pkgs: sources:
       configurePhase = ''
         substituteInPlace Makefile \
           --replace ../cheapglk ${glktermw-dev} \
-          --replace Make.cheapglk Make.glktermw
+          --replace Make.cheapglk Make.glktermw \
+          --replace 'OPTIONS =' 'OPTIONS = -O3'
       '';
 
       buildPhase = ''
