@@ -156,12 +156,12 @@ pkgs: sources:
       '';
 
       buildPhase = ''
-        make glulxe
+        make glulxe glulxdump
       '';
 
       installPhase = ''
         mkdir -p $out/bin
-        cp glulxe $out/bin
+        cp glulxe glulxdump $out/bin
       '';
     };
 }
