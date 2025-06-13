@@ -19,6 +19,9 @@ init:
 # This variable may already have been defined in the Makefile.
 ULX_DEPS += scaffolding bin story.ni $(shell find includes 2>/dev/null || true)
 
+# This variable may have been defined in the Makefile.
+TEST_DEPS ?=
+
 bin/test.ulx: $(ULX_DEPS)
 	inform7-compile bin/test.ulx -debug
 
@@ -26,7 +29,7 @@ bin/release.ulx: $(ULX_DEPS)
 	inform7-compile bin/release.ulx -release
 
 .PHONY: test
-test: bin/test.ulx
+test: bin/test.ulx $(TEST_DEPS)
 	glulxe bin/test.ulx
 
 scaffolding:
