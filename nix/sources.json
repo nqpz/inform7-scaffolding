@@ -5,10 +5,10 @@
         "homepage": "https://intfiction.org/t/friends-of-i7-github/4103",
         "owner": "i7",
         "repo": "extensions",
-        "rev": "9c52d89674b8de35bddf19dd58a65c3fc960b01f",
-        "sha256": "0alprvm9imjw9cmp3ikxc8q3h9fdf8dnx131k8c4bc29w042hyfh",
+        "rev": "4b3e2760303f653621a49a359e46e399aa4bddb1",
+        "sha256": "0csdr6v57n6x79sawiy7adsb63pl45gi1x1642fr8yw5wfry0dwq",
         "type": "tarball",
-        "url": "https://github.com/i7/extensions/archive/9c52d89674b8de35bddf19dd58a65c3fc960b01f.tar.gz",
+        "url": "https://github.com/i7/extensions/archive/4b3e2760303f653621a49a359e46e399aa4bddb1.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "inform": {
