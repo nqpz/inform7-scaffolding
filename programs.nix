@@ -111,7 +111,7 @@ pkgs: sources:
   };
 
   glulxe = let
-    buildInputs = [ pkgs.ncurses.dev ];
+    buildInputs = [ pkgs.ncurses.dev gcc ];
 
     # glktermw supports wide term characters.
     glktermw-dev = pkgs.stdenv.mkDerivation {
