@@ -111,16 +111,15 @@ pkgs: sources:
   };
 
   glulxe = let
-    buildInputs = [ pkgs.ncurses.dev gcc ];
+    buildInputs = [ pkgs.gcc ];
 
-    # glktermw supports wide term characters.
-    glktermw-dev = pkgs.stdenv.mkDerivation {
-      pname = "glktermw";
+    cheapglk-dev = pkgs.stdenv.mkDerivation {
+      pname = "cheapglk";
       version = "1.0.4";
 
       src = pkgs.fetchurl {
-        url = "https://eblong.com/zarf/glk/glktermw-104.tar.gz";
-        sha256 = "5968630b45e2fd53de48424559e3579db0537c460f4dc2631f258e1c116eb4ea";
+        url = "https://eblong.com/zarf/glk/cheapglk-107.tar.gz";
+        sha256 = "87b9a19d741c71a8d3bffbb0fd7833410672006d3815717c70860e1681043d4c";
       };
 
       inherit buildInputs;
@@ -150,8 +149,7 @@ pkgs: sources:
 
       configurePhase = ''
         substituteInPlace Makefile \
-          --replace ../cheapglk ${glktermw-dev} \
-          --replace Make.cheapglk Make.glktermw \
+          --replace ../cheapglk ${cheapglk-dev} \
           --replace 'OPTIONS =' 'OPTIONS = -O3'
       '';
 
