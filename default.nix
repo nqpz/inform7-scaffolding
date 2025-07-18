@@ -14,6 +14,7 @@ in
       pkgs.util-linux
       programs.inform7
       programs.glulxe
+      rlwrap
     ];
     shellHook = ''
       export INFORM7_SCAFFOLDING_INCLUDE_MK="${files.makefileInclude}"

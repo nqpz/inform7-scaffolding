@@ -30,7 +30,7 @@ bin/release.ulx: $(ULX_DEPS_BASE) $(ULX_DEPS_RELEASE)
 
 .PHONY: test
 test: bin/test.ulx $(TEST_DEPS)
-	glulxe bin/test.ulx
+	rlwrap glulxe bin/test.ulx
 
 scaffolding:
 	inform7-create-scaffolding
