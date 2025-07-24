@@ -20,7 +20,6 @@ init:
 ULX_DEPS_BASE += scaffolding bin story.ni $(shell find includes 2>/dev/null || true)
 ULX_DEPS_TEST ?=
 ULX_DEPS_RELEASE ?=
-TEST_DEPS ?=
 
 bin/test.ulx: $(ULX_DEPS_BASE) $(ULX_DEPS_TEST)
 	inform7-compile bin/test.ulx -debug
@@ -29,7 +28,7 @@ bin/release.ulx: $(ULX_DEPS_BASE) $(ULX_DEPS_RELEASE)
 	inform7-compile bin/release.ulx -release
 
 .PHONY: test
-test: bin/test.ulx $(TEST_DEPS)
+test: bin/test.ulx
 	rlwrap glulxe bin/test.ulx
 
 scaffolding:
