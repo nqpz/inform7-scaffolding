@@ -17,7 +17,7 @@ init:
 	inform7-init
 
 # These variables may already have been defined in the Makefile.
-ULX_DEPS_BASE += scaffolding bin story.ni $(shell find includes 2>/dev/null || true)
+ULX_DEPS_BASE += scaffolding bin story.ni
 ULX_DEPS_TEST ?=
 ULX_DEPS_RELEASE ?=
 
